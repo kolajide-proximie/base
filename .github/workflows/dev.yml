@@ -48,7 +48,7 @@ jobs:
           labels: '["major"]'
       
       - name: check if patch label exists 1
-        if: steps.check_pr_labels_patch.outputs.result == "true"
+        if: steps.check_pr_labels_patch.outputs.result == false
         run: echo "patch exists"
       
       - name: check if patch label exists 2
