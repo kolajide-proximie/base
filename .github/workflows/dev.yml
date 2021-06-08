@@ -28,3 +28,7 @@ jobs:
       
       - name: display labels
         run: echo "${{ toJson(github.event.pull_request.labels.*.name) }}"
+      
+      - name: Check for patch label
+        if: contains(github.event.pull_request.labels.*.name, 'patch')
+        run: echo "patch label exists"
