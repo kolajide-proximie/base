@@ -47,10 +47,10 @@ jobs:
           github-token: ${{ secrets.GH_TOKEN }}
           labels: '["major"]'
       
-      - name: check if patch label exists 1
+      - name: check if patch label is missing
         if: contains(steps.check_pr_labels_patch.outputs.result, 'false')
         run: echo "patch label not exists"
       
-      - name: check if patch label exists 2
+      - name: check if patch label exists 
         if: contains(steps.check_pr_labels_patch.outputs.result, 'true')
         run: echo "patch exists"
