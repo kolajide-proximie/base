@@ -25,3 +25,32 @@ jobs:
 
       - name: Deploying to dev
         run: echo "I wish I have a dev environment"
+      
+      - name: Check PR labels for patch
+        id: check_pr_labels_patch
+        uses: shioyang/check-pr-labels-on-push-action@v1.0.3
+        with:
+          github-token: ${{ secrets.GH_TOKEN }}
+          labels: '["patch"]'
+      
+      - name: Check PR labels for minor
+        id: check_pr_labels_minor
+        uses: shioyang/check-pr-labels-on-push-action@v1.0.3
+        with:
+          github-token: ${{ secrets.GH_TOKEN }}
+          labels: '["minor"]'
+          
+      - name: Check PR labels for major
+        id: check_pr_labels_major
+        uses: shioyang/check-pr-labels-on-push-action@v1.0.3
+        with:
+          github-token: ${{ secrets.GH_TOKEN }}
+          labels: '["major"]'
+      
+      - name: check if patch label is missing
+        if: contains(steps.check_pr_labels_patch.outputs.result, 'false')
+        run: echo "patch label not exists"
+      
+      - name: check if patch label exists 
+        if: contains(steps.check_pr_labels_patch.outputs.result, 'true')
+        run: echo "patch exists"
