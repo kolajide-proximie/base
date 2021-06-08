@@ -16,3 +16,5 @@
 - when released
 
 5. Automatic changelog generation happens only in: "released" pipeline.
+
+6. This repo tests the intuit auto tool for generating changelogs and releases 
