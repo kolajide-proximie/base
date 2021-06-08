@@ -1,11 +1,11 @@
-name: Deploy to staging
+name: Create Staging ChangeLog and Release
 
 on:
   release:
     types: ["prereleased"]
 
 jobs:
-  deploy-app:
+  deploy-staging:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -21,6 +21,9 @@ jobs:
 
       - name: Deploying to staging
         run: echo "I wish I have a staging environment"
+
+      
+    
 
 
 
