@@ -32,3 +32,13 @@ jobs:
       - name: Check for patch label
         if: contains(github.event.push.labels.*.name, 'patch')
         run: echo "patch label exists"
+      
+      - name: Check PR labels action step
+        id: check_pr_labels
+        uses: shioyang/check-pr-labels-on-push-action@v1.0.3
+        with:
+          github-token: ${{ secrets.GH_TOKEN }}
+          labels: '["patch"]'
+      
+      - name: See result
+        run: echo "${{ steps.check_pr_labels.outputs.result }}"
