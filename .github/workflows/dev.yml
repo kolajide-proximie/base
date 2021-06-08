@@ -47,14 +47,10 @@ jobs:
           github-token: ${{ secrets.GH_TOKEN }}
           labels: '["major"]'
       
-      - name: check if patch label exists 
-        if: ${{ steps.check_pr_labels_patch.outputs.result }}
-        run: echo "${{ steps.check_pr_labels_patch.outputs.result }}"
+      - name: check if patch label exists 1
+        if: steps.check_pr_labels_patch.outputs.result == "true"
+        run: echo "patch exists"
       
-      - name: check if minor label exists 
-        if: ${{ steps.check_pr_labels_minor.outputs.result }}
-        run: echo "${{ steps.check_pr_labels_minor.outputs.result }}"
-      
-      - name: check if major label exists 
-        if: ${{ steps.check_pr_labels_major.outputs.result }}
-        run: echo "${{ steps.check_pr_labels_major.outputs.result }}"
+      - name: check if patch label exists 2
+        if: steps.check_pr_labels_patch.outputs.result == true
+        run: echo "patch exists"
