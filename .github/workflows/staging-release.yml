@@ -71,9 +71,9 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          ./scripts/bump.sh -p v major 
-          git push --tags   
           git fetch --tags
+          ./scripts/bump.sh -p v major 
+          git push --tags
           ~/auto next
 
 
