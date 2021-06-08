@@ -18,13 +18,36 @@ jobs:
 
       - name: Test
         run: npm run test
+      
+      - name: Check PR labels for patch
+        id: check_pr_labels_patch
+        uses: shioyang/check-pr-labels-on-push-action@v1.0.3
+        with:
+          github-token: ${{ secrets.GH_TOKEN }}
+          labels: '["patch"]'
+      
+      - name: Check PR labels for minor
+        id: check_pr_labels_minor
+        uses: shioyang/check-pr-labels-on-push-action@v1.0.3
+        with:
+          github-token: ${{ secrets.GH_TOKEN }}
+          labels: '["minor"]'
+      
+      - name: Check PR labels for major
+        id: check_pr_labels_major
+        uses: shioyang/check-pr-labels-on-push-action@v1.0.3
+        with:
+          github-token: ${{ secrets.GH_TOKEN }}
+          labels: '["major"]'
+
+
 
       - name: Download auto 
         run: curl -vkL -o - https://github.com/intuit/auto/releases/download/v10.29.2/auto-linux.gz | gunzip > ~/auto && chmod a+x ~/auto
       
 
       - name: Do Patch PreRelease 
-        if: contains(github.event.pull_request.labels.*.name, 'patch') 
+        if: contains(steps.check_pr_labels_patch.outputs.result, 'true')
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
@@ -32,6 +55,27 @@ jobs:
           git push --tags   
           git fetch --tags
           ~/auto next
+      
+      - name: Do Minor PreRelease 
+        if: contains(steps.check_pr_labels_minor.outputs.result, 'true')
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          ./scripts/bump.sh -p v minor
+          git push --tags   
+          git fetch --tags
+          ~/auto next
+      
+      - name: Do Major PreRelease 
+        if: contains(steps.check_pr_labels_major.outputs.result, 'true')
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          ./scripts/bump.sh -p v major 
+          git push --tags   
+          git fetch --tags
+          ~/auto next
+
 
       
     
