@@ -23,9 +23,11 @@ jobs:
         run: curl -vkL -o - https://github.com/intuit/auto/releases/download/v10.29.2/auto-linux.gz | gunzip > ~/auto && chmod a+x ~/auto
       
       - name: Do Release
+        if: contains(github.event.pull_request.labels.*.name, 'patch') 
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}  
         run: | 
+          ./scripts/bump.sh -p v patch
+          git push --tags  
           git fetch --tags
-          git push --follow-tags --set-upstream origin $branch
           ~/auto release
