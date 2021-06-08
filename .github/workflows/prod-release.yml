@@ -1,0 +1,30 @@
+name: Create Production Release and Changelog 
+
+on:
+  push:
+    branches:
+      - production
+jobs:
+  release-prod:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Test
+        run: npm run test
+
+      - name: Download auto 
+        run: curl -vkL -o - https://github.com/intuit/auto/releases/download/v10.29.2/auto-linux.gz | gunzip > ~/auto && chmod a+x ~/auto
+      
+      - name: Do Release
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}  
+        run: | 
+          git fetch --tags
+          ~/auto release
