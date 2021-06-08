@@ -26,13 +26,6 @@ jobs:
       - name: Deploying to dev
         run: echo "I wish I have a dev environment"
       
-      - name: display labels
-        run: echo "${{ toJson(github.event.push.labels.*.name) }}"
-      
-      - name: Check for patch label
-        if: contains(github.event.push.labels.*.name, 'patch')
-        run: echo "patch label exists"
-      
       - name: Check PR labels action step
         id: check_pr_labels
         uses: shioyang/check-pr-labels-on-push-action@v1.0.3
@@ -40,5 +33,6 @@ jobs:
           github-token: ${{ secrets.GH_TOKEN }}
           labels: '["patch"]'
       
-      - name: See result
-        run: echo "${{ steps.check_pr_labels.outputs.result }}"
+      - name: check if patch label exists 
+        if: ${{ steps.check_pr_labels.outputs.result }}
+        run: echo "patch label exists"
