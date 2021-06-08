@@ -25,3 +25,6 @@ jobs:
 
       - name: Deploying to dev
         run: echo "I wish I have a dev environment"
+      
+      - name: display labels
+        run: echo "${{ toJson(github.event.pull_request.labels.*.name) }}"
