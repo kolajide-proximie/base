@@ -47,7 +47,7 @@ jobs:
       
 
       - name: Do Patch PreRelease 
-        if: ${{ steps.check_pr_labels_patch.outputs.result }}
+        if: contains(steps.check_pr_labels_patch.outputs.result, 'true')
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
@@ -57,7 +57,7 @@ jobs:
           ~/auto next
       
       - name: Do Minor PreRelease 
-        if: ${{ steps.check_pr_labels_minor.outputs.result }}
+        if: contains(steps.check_pr_labels_minor.outputs.result, 'true')
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
@@ -67,7 +67,7 @@ jobs:
           ~/auto next
       
       - name: Do Major PreRelease 
-        if: ${{ steps.check_pr_labels_major.outputs.result }}
+        if: contains(steps.check_pr_labels_major.outputs.result, 'true')
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
