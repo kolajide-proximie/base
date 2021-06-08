@@ -1,0 +1,16 @@
+{
+  "plugins": [
+    "git-tag"
+  ],
+  "owner": "kolajide-proximie",
+  "repo": "base",
+  "name": "Kayode Olajide",
+  "email": "kolajide@proximie.com",
+  "onlyPublishWithReleaseLabel": true,
+  "baseBranch": "production",
+  "prereleaseBranches": ["staging"],
+  "next": {
+    "message": "s"
+  }
+
+}

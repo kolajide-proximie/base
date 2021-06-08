@@ -5,7 +5,7 @@ on:
     types: ["released"]
 
 jobs:
-  deploy-app:
+  deploy-prod:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -22,5 +22,4 @@ jobs:
       - name: Deploying to production
         run: echo "I wish I have a production environment"
 
-      - name: Automatic changelog generation
-        run: echo "TODO: implement logic to generate changelog automatically"
+      
