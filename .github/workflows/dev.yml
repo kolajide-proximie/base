@@ -27,8 +27,8 @@ jobs:
         run: echo "I wish I have a dev environment"
       
       - name: display labels
-        run: echo "${{ toJson(github.event.pull_request.labels.*.name) }}"
+        run: echo "${{ toJson(github.event.push.labels.*.name) }}"
       
       - name: Check for patch label
-        if: contains(github.event.pull_request.labels.*.name, 'patch')
+        if: contains(github.event.push.labels.*.name, 'patch')
         run: echo "patch label exists"
