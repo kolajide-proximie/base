@@ -9,5 +9,5 @@ app.use("*", (_, res) => {
 });
 
 app.listen(DEFAULT_PORT_NUMBER, () => {
-  console.log(`Server is listening on a port: ${DEFAULT_PORT_NUMBER}`);
+  console.log(`My Server is listening on a port: ${DEFAULT_PORT_NUMBER}`);
 });
