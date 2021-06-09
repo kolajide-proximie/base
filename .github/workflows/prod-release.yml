@@ -48,9 +48,10 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          ./scripts/bump.sh -p v patch 
-          git push --tags   
+          git tag -d $(git tag -l)   
           git fetch --tags
+          ./scripts/bump.sh -p v patch
+          git push --tags  
           ~/auto release
       
       - name: Do Minor PreRelease 
@@ -58,9 +59,10 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
+          git tag -d $(git tag -l)   
+          git fetch --tags 
           ./scripts/bump.sh -p v minor
           git push --tags   
-          git fetch --tags
           ~/auto release
       
       - name: Do Major PreRelease 
@@ -68,7 +70,8 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
+          git tag -d $(git tag -l)   
+          git fetch --tags 
           ./scripts/bump.sh -p v major 
-          git push --tags   
-          git fetch --tags
+          git push --tags  
           ~/auto release
