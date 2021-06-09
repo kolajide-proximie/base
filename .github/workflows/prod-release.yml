@@ -52,7 +52,7 @@ jobs:
           git fetch --tags
           ./scripts/bump.sh -p v patch
           git push --tags  
-          ~/auto release
+          ~/auto shipit
       
       - name: Do Minor PreRelease 
         if: contains(steps.check_pr_labels_minor.outputs.result, 'true')
@@ -63,7 +63,7 @@ jobs:
           git fetch --tags 
           ./scripts/bump.sh -p v minor
           git push --tags   
-          ~/auto release
+          ~/auto shipit
       
       - name: Do Major PreRelease 
         if: contains(steps.check_pr_labels_patch.major.result, 'true')
@@ -74,4 +74,4 @@ jobs:
           git fetch --tags 
           ./scripts/bump.sh -p v major 
           git push --tags  
-          ~/auto release
+          ~/auto shipit
