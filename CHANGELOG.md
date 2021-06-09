@@ -1,3 +1,22 @@
+# v4.0.6 (Wed Jun 09 2021)
+
+### Release Notes
+
+#### fix: P40-1008: update running text ([#38](https://github.com/kolajide-proximie/base/pull/38))
+
+The text on the console will be updated!
+
+---
+
+#### 🐛 Bug Fix
+
+
+#### Authors: 1
+
+- [@kolajide-proximie](https://github.com/kolajide-proximie)
+
+---
+
 # v4.0.4 (Wed Jun 09 2021)
 
 ### Release Notes
