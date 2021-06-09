@@ -51,6 +51,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
+          git tag -d $(git tag -l)
           git fetch --tags
           ~/auto next
       
@@ -59,6 +60,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |  
+          git tag -d $(git tag -l)
           git fetch --tags
           ~/auto next
       
@@ -67,7 +69,8 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          git push --tags
+          git tag -d $(git tag -l)
+          git fetch --tags
           ~/auto next
 
 
