@@ -51,8 +51,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          ./scripts/bump.sh -p v patch 
-          git push --tags   
+          git tag -d $(git tag -l)
           git fetch --tags
           ~/auto next
       
@@ -60,9 +59,8 @@ jobs:
         if: contains(steps.check_pr_labels_minor.outputs.result, 'true')
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: |
-          ./scripts/bump.sh -p v minor
-          git push --tags   
+        run: |  
+          git tag -d $(git tag -l)
           git fetch --tags
           ~/auto next
       
@@ -71,9 +69,8 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
+          git tag -d $(git tag -l)
           git fetch --tags
-          ./scripts/bump.sh -p v major 
-          git push --tags
           ~/auto next
 
 
